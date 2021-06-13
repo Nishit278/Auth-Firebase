@@ -3,6 +3,7 @@ import Signup from "./components/Signup";
 import { AuthProvider } from "./contexts/AuthContext";
 import { Switch, Route, Redirect } from "react-router-dom";
 import Login from "./components/Login";
+import Dashboard from "./components/Dashboard";
 
 function App() {
   return (
@@ -13,10 +14,10 @@ function App() {
       <div className="w-100" style={{ maxWidth: "400px" }}>
         <AuthProvider>
           <Switch>
-            <Route path="/dashboard" component={null} />
+            <Route path="/dashboard" component={Dashboard} />
             <Route path="/signup" component={Signup} />
             <Route path="/login" component={Login} />
-            <Redirect from="/" exact to="/signup" />
+            <Redirect from="/" exact to="/dashboard" />
           </Switch>
         </AuthProvider>
       </div>
