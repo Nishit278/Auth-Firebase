@@ -1,7 +1,7 @@
 import React, { useRef, useState } from "react";
 import { Form, Button, Card, Alert } from "react-bootstrap";
 import { useAuth } from "../contexts/AuthContext";
-import { Link } from "react-router-dom";
+import { Link, useHistory } from "react-router-dom";
 
 function Login(props) {
   const [error, setError] = useState("");
@@ -9,6 +9,7 @@ function Login(props) {
   const emailRef = useRef();
   const passwordRef = useRef();
   const { login } = useAuth();
+  const history = useHistory();
 
   const handleSubmit = async (e) => {
     e.preventDefault();
@@ -16,6 +17,7 @@ function Login(props) {
       setError("");
       setLoading(true);
       await login(emailRef.current.value, passwordRef.current.value);
+      history.push("/");
     } catch (ex) {
       setError("Failed to sign in.");
     }
