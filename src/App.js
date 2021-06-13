@@ -1,7 +1,7 @@
 import { Container } from "react-bootstrap";
 import Signup from "./components/Signup";
 import { AuthProvider } from "./contexts/AuthContext";
-import { Switch, Route, Redirect } from "react-router-dom";
+import { Switch, Route } from "react-router-dom";
 import PrivateRoute from "./components/PrivateRoute";
 import Login from "./components/Login";
 import Dashboard from "./components/Dashboard";
