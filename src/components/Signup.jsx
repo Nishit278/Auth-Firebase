@@ -1,7 +1,7 @@
 import React, { useRef, useState } from "react";
 import { Form, Button, Card, Alert } from "react-bootstrap";
 import { useAuth } from "../contexts/AuthContext";
-import {Link} from "react-router-dom"
+import { Link } from "react-router-dom";
 
 function Signup(props) {
   const [error, setError] = useState("");
@@ -24,6 +24,7 @@ function Signup(props) {
     } catch (ex) {
       setError("Failed to create an account");
     }
+    setLoading(false);
   };
   return (
     <>
@@ -61,7 +62,10 @@ function Signup(props) {
         </Card.Body>
       </Card>
       <div className="w-100 text-center mt-2">
-        Already have an account ? <Link style={{textDecoration: "none"}} to="/login">Log in</Link>
+        Already have an account ?{" "}
+        <Link style={{ textDecoration: "none" }} to="/login">
+          Log in
+        </Link>
       </div>
     </>
   );

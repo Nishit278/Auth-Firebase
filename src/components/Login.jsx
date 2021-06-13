@@ -11,6 +11,7 @@ function Login(props) {
   const { login } = useAuth();
 
   const handleSubmit = async (e) => {
+    e.preventDefault();
     try {
       setError("");
       setLoading(true);
@@ -18,6 +19,7 @@ function Login(props) {
     } catch (ex) {
       setError("Failed to sign in.");
     }
+    setLoading(false);
   };
   return (
     <>
@@ -47,7 +49,10 @@ function Login(props) {
         </Card.Body>
       </Card>
       <div className="w-100 text-center mt-2">
-        Don't have an account ? <Link style={{textDecoration: "none"}} to="/signup">Sign up</Link>
+        Don't have an account ?{" "}
+        <Link style={{ textDecoration: "none" }} to="/signup">
+          Sign up
+        </Link>
       </div>
     </>
   );
