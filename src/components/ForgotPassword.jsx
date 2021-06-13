@@ -3,21 +3,23 @@ import { Form, Button, Card, Alert } from "react-bootstrap";
 import { useAuth } from "../contexts/AuthContext";
 import { Link } from "react-router-dom";
 
-function Login(props) {
+function ForgotPassword(props) {
   const [error, setError] = useState("");
+  const [message, setMessage] = useState("");
   const [loading, setLoading] = useState(false);
   const emailRef = useRef();
-  const passwordRef = useRef();
-  const { login } = useAuth();
+  const { resetPassword } = useAuth();
 
   const handleSubmit = async (e) => {
     e.preventDefault();
     try {
+      setMessage("");
       setError("");
       setLoading(true);
-      await login(emailRef.current.value, passwordRef.current.value);
-    } catch (ex) {
-      setError("Failed to sign in.");
+      await resetPassword(emailRef.current.value);
+      setMessage("Check your email for further instructions.");
+    } catch {
+      setError("Failed to reset password");
     }
     setLoading(false);
   };
@@ -25,36 +27,28 @@ function Login(props) {
     <>
       <Card>
         <Card.Body>
-          <h2 className="text-center mb-4">Log In</h2>
+          <h2 className="text-center mb-4">Reset Password</h2>
           {error && <Alert variant="danger">{error}</Alert>}
+          {message && <Alert variant="success">{message}</Alert>}
           <Form onSubmit={handleSubmit}>
             <Form.Group id="email" className="mb-3">
               <Form.Label>Email</Form.Label>
               <Form.Control type="email" ref={emailRef} required></Form.Control>
             </Form.Group>
 
-            <Form.Group id="password" className="mb-3">
-              <Form.Label>Password</Form.Label>
-              <Form.Control
-                type="password"
-                ref={passwordRef}
-                required
-              ></Form.Control>
-            </Form.Group>
-
             <Button disabled={loading} className="w-100 mt-3" type="submit">
-              Log In
+              Reset Password
             </Button>
           </Form>
           <div className="w-100 text-center mt-3">
-            <Link to="/forgot-password" style={{ textDecoration: "none" }}>
-              Forgot Password ?
+            <Link to="/login" style={{ textDecoration: "none" }}>
+              Log in
             </Link>
           </div>
         </Card.Body>
       </Card>
       <div className="w-100 text-center mt-2">
-        Don't have an account ?{" "}
+        Don't have an account ?
         <Link style={{ textDecoration: "none" }} to="/signup">
           Sign up
         </Link>
@@ -63,4 +57,4 @@ function Login(props) {
   );
 }
 
-export default Login;
+export default ForgotPassword;

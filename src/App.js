@@ -2,8 +2,10 @@ import { Container } from "react-bootstrap";
 import Signup from "./components/Signup";
 import { AuthProvider } from "./contexts/AuthContext";
 import { Switch, Route, Redirect } from "react-router-dom";
+import PrivateRoute from "./components/PrivateRoute";
 import Login from "./components/Login";
 import Dashboard from "./components/Dashboard";
+import ForgotPassword from "./components/ForgotPassword";
 
 function App() {
   return (
@@ -14,10 +16,10 @@ function App() {
       <div className="w-100" style={{ maxWidth: "400px" }}>
         <AuthProvider>
           <Switch>
-            <Route path="/dashboard" component={Dashboard} />
+            <PrivateRoute exact path="/" component={Dashboard} />
             <Route path="/signup" component={Signup} />
             <Route path="/login" component={Login} />
-            <Redirect from="/" exact to="/dashboard" />
+            <Route path="/forgot-password" component={ForgotPassword} />
           </Switch>
         </AuthProvider>
       </div>
