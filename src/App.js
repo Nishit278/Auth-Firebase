@@ -1,9 +1,11 @@
 import { Container } from "react-bootstrap";
 import Signup from "./components/Signup";
+import {AuthProvider} from "./contexts/AuthContext"
 
 function App() {
   return (
-    <Container
+    <AuthProvider>
+      <Container
       className="d-flex align-items-center justify-content-center flex-direction-colum"
       style={{ minHeight: "100vh" }}
     >
@@ -11,6 +13,7 @@ function App() {
         <Signup />
       </div>
     </Container>
+    </AuthProvider>
   );
 }
 
